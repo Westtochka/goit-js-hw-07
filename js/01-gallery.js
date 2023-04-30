@@ -30,7 +30,7 @@ console.log(imgCard)
 
 photoList.addEventListener('click', onGalleryClick)
 function onGalleryClick(evt){
-  if(!evt.target.classList.contains('gallery__image'))
+  if(!evt.target.classList.contains('.gallery__image'))
   {return}
   console.log(evt.target.src)
   
@@ -38,7 +38,7 @@ function onGalleryClick(evt){
 
   console.log(evt.target.src)
 
-  document.querySelector('gallery__image').onclick = () => {
+  document.querySelector('.gallery__image').onclick = () => {
 
 	basicLightbox.create(`
 		<img width="600" height="800" src="${evt.target.dataset.source}">
