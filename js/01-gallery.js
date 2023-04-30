@@ -4,7 +4,7 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const photoList=document.querySelector(".gallery")
-console.log(photoList)
+// console.log(photoList)
 
 const imgCard=createImgCards(galleryItems);
 photoList.insertAdjacentHTML('beforeend', imgCard)
@@ -26,25 +26,29 @@ alt="${description}" width=100%></img>
     `
 }).join("")}
 console.log(imgCard)
-
+console.log(photoList)
 
 photoList.addEventListener('click', onGalleryClick)
+
 function onGalleryClick(evt){
-  if(!evt.target.classList.contains('.gallery__image'))
-  {return}
-  console.log(evt.target.src)
-  
-  evt.target.src=evt.target.dataset.source;
+  evt.preventDefault();
+  if(!evt.target.classList.contains("gallery__image")){
+    return;
+  }
+evt.target.src=evt.target.dataset.source;
 
-  console.log(evt.target.src)
-
-  document.querySelector('.gallery__image').onclick = () => {
-
-	basicLightbox.create(`
-		<img width="600" height="800" src="${evt.target.dataset.source}">
-	`).show()
-
-}  
+const instance = basicLightbox.create(`
+    <img src="${evt.target.dataset.source}" width="800" height="600">
+`)
+instance.show()
 };
 
+// window.addEventListener('keydown',onCloseModal)
+
+// function onCloseModal(evt){
+// if(evt.currentTarget===evt.current){
+//   console.log("це воно")
+//   instance.delete(show);
+// }
+// }
 
