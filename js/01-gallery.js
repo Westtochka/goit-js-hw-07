@@ -28,15 +28,23 @@ alt="${description}" width=100%></img>
 console.log(imgCard)
 
 
-  const gall=galleryItems.forEach((el)=>{el.value})
-  console.log(gall)
-
 photoList.addEventListener('click', onGalleryClick)
 function onGalleryClick(evt){
   if(!evt.target.classList.contains('gallery__image'))
   {return}
+  console.log(evt.target.src)
+  
+  evt.target.src=evt.target.dataset.source;
 
   console.log(evt.target.src)
-  evt.target.src=evt.target.dataset.source;
-  console.log(evt.target.src)
+
+  document.querySelector('gallery__image').onclick = () => {
+
+	basicLightbox.create(`
+		<img width="600" height="800" src="${evt.target.dataset.source}">
+	`).show()
+
+}  
 };
+
+
