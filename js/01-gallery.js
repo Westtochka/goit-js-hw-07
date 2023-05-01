@@ -39,22 +39,32 @@ function onOpenModal(evt){
 // evt.target.src=evt.target.dataset.source;
 const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="800" height="600">
-`)
+`, 
+{
+  onShow: instance=>{
+    window.addEventListener('keydown',onEscKeyPress)
+    
+  },
+  onClose: instance=>{
+    window.removeEventListener('keydown',onEscKeyPress)
+  }
+})
 instance.show()
-};
-
-window.addEventListener('keydown',onCloseModal)
-
-function onCloseModal(evt){
-  window.removeEventListener('keydown',onEscKeyPress)
-if(evt.currentTarget===evt.current){
-  instance.delete(show);
-}
-}
-
 function onEscKeyPress(evt){
   console.log(evt.code)
   if(evt.code==='Escape'){
-    onCloseModal()
+    instance.close()
   }
 }
+};
+
+
+
+// function onCloseModal(evt){
+//   window.removeEventListener('keydown',onEscKeyPress)
+// if(evt.currentTarget===evt.current){
+//   instance.delete(show);
+// }
+// }
+
+
