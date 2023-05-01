@@ -28,27 +28,33 @@ alt="${description}" width=100%></img>
 console.log(imgCard)
 console.log(photoList)
 
-photoList.addEventListener('click', onGalleryClick)
-
-function onGalleryClick(evt){
-  evt.preventDefault();
+photoList.addEventListener('click', onOpenModal)
+function onOpenModal(evt){
+  evt.preventDefault();  
+  window.addEventListener('keydown',onEscKeyPress)
+  
   if(!evt.target.classList.contains("gallery__image")){
     return;
   }
-evt.target.src=evt.target.dataset.source;
-
+// evt.target.src=evt.target.dataset.source;
 const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="800" height="600">
 `)
 instance.show()
 };
 
-// window.addEventListener('keydown',onCloseModal)
+window.addEventListener('keydown',onCloseModal)
 
-// function onCloseModal(evt){
-// if(evt.currentTarget===evt.current){
-//   console.log("це воно")
-//   instance.delete(show);
-// }
-// }
+function onCloseModal(evt){
+  window.removeEventListener('keydown',onEscKeyPress)
+if(evt.currentTarget===evt.current){
+  instance.delete(show);
+}
+}
 
+function onEscKeyPress(evt){
+  console.log(evt.code)
+  if(evt.code==='Escape'){
+    onCloseModal()
+  }
+}
