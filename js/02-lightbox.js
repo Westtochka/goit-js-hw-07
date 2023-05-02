@@ -25,26 +25,8 @@ alt="${description}" width=100%></img>
 </li>
     `
 }).join("")}
-console.log(imgCard)
-console.log(photoList)
-
-photoList.addEventListener('click', onOpenModal)
-function onOpenModal(evt){
-  evt.preventDefault();  
-  window.addEventListener('keydown',onEscKeyPress)
-  
-  if(!evt.target.classList.contains("gallery__image")){
-    return;
-  }
 
 const lightbox = new SimpleLightbox('.gallery a', { captionsData:'alt',
     captionPosition:'bottom',
     animationSpeed:250});
 
-function onEscKeyPress(evt){
-  console.log(evt.code)
-  if(evt.code==='Escape'){
-    instance.close()
-  }
-}
-};
